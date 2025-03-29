@@ -13,9 +13,12 @@ function [yn, yorigin] = delay(xn, xorigin, k)
     plot2d3(ny, yn, style=5);
     title("yn1");
 endfunction
-xn1 = [1, -2, 3, 6, 9, 7];
-xo1 = 4;
-[yn1, yo1] = delay(xn1, xo1,2)
+//xn1 = [0, 1, 1, 1, 1, 0.5, 0.5];
+xn1 = [1, -1, 0, 0, 2, -4];
+xn2 = [-2, 3, 1, 0, -3];
+xo1 = 2;
+xo2 = 2;
+[yn1, yo1] = delay(xn1, xo1, 2)
  
  
 //EX2
@@ -33,10 +36,10 @@ function [yn, yorigin] = advance (xn, xorigin, k)
     plot2d3(ny, yn, style=5);
     title("yn2");
 endfunction
-xn2 = [1, -2, 3, 6, 9, 7];
-xo2 = 4;
-[yn2, yo2] = advance(xn2, xo2,2)
-
+//xn2 = [0, 1, 1, 1, 1, 0.5, 0.5];
+//xo2 = 3;
+[yn3, yo3]=fold(xn2, xo2);
+[yn2, yo2] = delay(yn3, yo3, 1)
 //EX3
 function [yn, yorigin] = fold(xn, xorigin)
     yorigin = length(xn)- xorigin + 1;
@@ -52,9 +55,10 @@ function [yn, yorigin] = fold(xn, xorigin)
     plot2d3(ny,yn,style=5);
     title("yn3");
     endfunction
-xn3 = [1, -2, 3, 6, 9, 7];
-xo3 = 4;
+/*xn3 = [0, 1, 1, 1, 1, 0.5, 0.5];
+xo3 = 3;
 [yn3, yo3]=fold(xn3, xo3);
+[yn31, yo31] = advance(yn3, yo3 , 4)*/
 
 //EX4
 function [yn, yorigin] = add (x1n, x1origin, x2n, x2origin)
@@ -94,9 +98,10 @@ function [yn, yorigin] = add (x1n, x1origin, x2n, x2origin)
     plot2d3(n, yn, style=5);
     title('y(n) = x1(n) + x2(n)');
 endfunction
-x1n = [1, -2, 3, 6, 9, 7];
+/*x1n = [1, -2, 3, 6, 9, 7];
 x2n = [1, 1, 2, 3, -5, -3];
-[yn4, yo4]= add(x1n, 4, x2n, 2);
+[yn4, yo4]= add(x1n, 4, x2n, 2);*/
+[yn4, yo4]= add(yn1, yo1, yn2, yo2);
 
 //EX5
 function [yn, yorigin] = multi (x1n, x1origin, x2n, x2origin)
@@ -138,9 +143,11 @@ function [yn, yorigin] = multi (x1n, x1origin, x2n, x2origin)
     plot2d3(n, yn, style=5);
     title('y(n) = x1(n) .* x2(n)');
     endfunction
-x1n = [1, -2, 3, 6, 9, 7];
+/*x1n = [1, -2, 3, 6, 9, 7];
 x2n = [1, 1, 2, 3, -5, -3];
-[yn5, yo5]= multi(x1n, 4, x2n, 2);
+[yn5, yo5]= multi(x1n, 4, x2n, 2);*/
+[yn5, yo5]= multi(yn1, yo1, yn2, yo2);
+
 
 //EX6
 function [yn, yorigin] = convolution(xn, xorigin, hn, horigin)
@@ -166,6 +173,6 @@ subplot(3,1,3);
 plot2d3(ny, yn, style=5);
 title('Convolution: y(n) = x(n) * h(n)');
 endfunction
-xn = [1, -2, 3, 2];
+/*xn = [1, -2, 3, 2];
 hn = [1, 1, 2, 3];
-[yn, yorigin] = convolution(xn, 4, hn, 2);
+[yn, yorigin] = convolution(xn, 4, hn, 2);*/
